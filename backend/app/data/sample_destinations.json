@@ -1,0 +1,486 @@
+[
+  {
+    "id": "hampi",
+    "name": "Hampi",
+    "name_kannada": "ಹಂಪಿ",
+    "region": "heritage_circuit",
+    "interests": ["heritage", "spirituality", "adventure"],
+    "short_description": "UNESCO World Heritage site with boulder-strewn landscapes and magnificent ruins of the Vijayanagara Empire.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 1400,
+    "estimated_daily_food_cost": 500,
+    "latitude": 15.3350,
+    "longitude": 76.4600,
+    "best_season": "October to March",
+    "highlight_foods": ["Jolada Rotti Oota", "Mirchi Bajji", "Tender Coconut", "South Indian Filter Coffee"],
+    "tags": ["unesco", "temples", "bouldering", "tungabhadra", "history"],
+    "sample_attractions": [
+      {
+        "title": "Virupaksha Temple & Hampi Bazaar",
+        "description": "7th-century functioning temple dedicated to Lord Shiva with towering 50m gopuram.",
+        "estimated_entry_fee_inr": 25,
+        "estimated_time_hours": 2.5,
+        "category": "heritage",
+        "is_estimate": true
+      },
+      {
+        "title": "Vijaya Vittala Temple & Stone Chariot",
+        "description": "Iconic musical pillars and the world-famous stone chariot monolith.",
+        "estimated_entry_fee_inr": 40,
+        "estimated_time_hours": 3.0,
+        "category": "heritage",
+        "is_estimate": true
+      },
+      {
+        "title": "Matanga Hill Sunrise Trek",
+        "description": "Panoramic sunrise viewpoint overlooking the boulders and ruins across Tungabhadra river.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 2.0,
+        "category": "adventure",
+        "is_estimate": false
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "mysuru",
+    "name": "Mysuru",
+    "name_kannada": "ಮೈಸೂರು",
+    "region": "southern_karnataka",
+    "interests": ["heritage", "food", "spirituality"],
+    "short_description": "The cultural capital of Karnataka renowned for its royal heritage, silk weaving, sandalwood, and grand palace.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 1600,
+    "estimated_daily_food_cost": 650,
+    "latitude": 12.2958,
+    "longitude": 76.6394,
+    "best_season": "September to March",
+    "highlight_foods": ["Mysore Pak", "Mylari Masala Dosa", "Mysore Rasam", "Filter Coffee"],
+    "tags": ["palace", "royalty", "silk", "sandalwood", "museums"],
+    "sample_attractions": [
+      {
+        "title": "Mysore Palace (Amba Vilas)",
+        "description": "Indo-Saracenic royal palace glowing with thousands of golden bulbs on Sundays and festive evenings.",
+        "estimated_entry_fee_inr": 100,
+        "estimated_time_hours": 3.0,
+        "category": "heritage",
+        "is_estimate": true
+      },
+      {
+        "title": "Chamundi Hill & Sri Chamundeshwari Temple",
+        "description": "Ancient hilltop temple overlooking Mysuru city with colossal monolithic Nandi statue.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 2.5,
+        "category": "spirituality",
+        "is_estimate": false
+      },
+      {
+        "title": "Devaraja Market Walking Tour",
+        "description": "Century-old vibrant market full of fresh flowers, Mysore betel leaves, perfumes, and spices.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 1.5,
+        "category": "food",
+        "is_estimate": false
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "coorg",
+    "name": "Madikeri (Coorg)",
+    "name_kannada": "ಮಡಿಕೇರಿ (ಕೊಡಗು)",
+    "region": "western_ghats",
+    "interests": ["nature", "food", "adventure", "spirituality"],
+    "short_description": "The Scotland of India with mist-covered coffee plantations, spice gardens, and cascading waterfalls.",
+    "ideal_duration_days": 3,
+    "estimated_stay_cost_per_night": 2200,
+    "estimated_daily_food_cost": 750,
+    "latitude": 12.4244,
+    "longitude": 75.7382,
+    "best_season": "September to May",
+    "highlight_foods": ["Pandi Curry / Veg Mushroom Curry", "Kadambuttu (Rice Dumplings)", "Coorg Honey", "Estate Coffee"],
+    "tags": ["coffee", "waterfalls", "hills", "plantations", "kodava"],
+    "sample_attractions": [
+      {
+        "title": "Abbey Falls & Coffee Estate Walk",
+        "description": "Roaring waterfall nestled amidst spice groves and lush Western Ghat greenery.",
+        "estimated_entry_fee_inr": 30,
+        "estimated_time_hours": 2.0,
+        "category": "nature",
+        "is_estimate": true
+      },
+      {
+        "title": "Raja's Seat Sunset Pavilion",
+        "description": "Historic hill terrace offering sunset views across layered misty valleys.",
+        "estimated_entry_fee_inr": 20,
+        "estimated_time_hours": 1.5,
+        "category": "nature",
+        "is_estimate": true
+      },
+      {
+        "title": "Namdroling Golden Temple (Bylakuppe)",
+        "description": "Largest Tibetan monastery in South India featuring 40-foot gilded Buddha statues.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 2.0,
+        "category": "spirituality",
+        "is_estimate": false
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "gokarna",
+    "name": "Gokarna",
+    "name_kannada": "ಗೋಕರ್ಣ",
+    "region": "coastal",
+    "interests": ["beaches", "spirituality", "adventure", "nature"],
+    "short_description": "Tranquil coastal haven where ancient Shiva temples meet pristine Arabian Sea crescent beaches.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 1500,
+    "estimated_daily_food_cost": 600,
+    "latitude": 14.5479,
+    "longitude": 74.3188,
+    "best_season": "October to April",
+    "highlight_foods": ["Fish Thali / Upma & Sheera", "Gadbad Icecream", "Kokum Sharbat", "Banana Bun"],
+    "tags": ["beaches", "trekking", "temples", "coastline", "sunset"],
+    "sample_attractions": [
+      {
+        "title": "Om Beach & Half Moon Beach Trek",
+        "description": "Scenic cliffside trail connecting beaches shaped naturally like the holy Om symbol.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 3.0,
+        "category": "adventure",
+        "is_estimate": false
+      },
+      {
+        "title": "Mahabaleshwar Temple",
+        "description": "Ancient Atmalinga shrine displaying classic Dravidian granite craftsmanship.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 1.5,
+        "category": "spirituality",
+        "is_estimate": false
+      },
+      {
+        "title": "Kudle Beach Sunset & Beach Shack Cafe",
+        "description": "Relaxed seaside cove ideal for swimming and evening beach walks.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 2.5,
+        "category": "beaches",
+        "is_estimate": false
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "chikmagalur",
+    "name": "Chikmagalur",
+    "name_kannada": "ಚಿಕ್ಕಮಗಳೂರು",
+    "region": "western_ghats",
+    "interests": ["nature", "adventure", "food"],
+    "short_description": "Coffee cradle of India nestled in the foothills of the Mullayanagiri range.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 2000,
+    "estimated_daily_food_cost": 650,
+    "latitude": 13.3161,
+    "longitude": 75.7720,
+    "best_season": "September to May",
+    "highlight_foods": ["Malnad Akki Rotti", "Kaayi Kadabu", "Halasina Hannu Halwa", "Chikmagalur Arabica Coffee"],
+    "tags": ["coffee", "trekking", "peaks", "clouds", "malnad"],
+    "sample_attractions": [
+      {
+        "title": "Mullayanagiri Peak Trek",
+        "description": "Highest peak in Karnataka (1,930 m) surrounded by rolling clouds and grasslands.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 3.5,
+        "category": "adventure",
+        "is_estimate": false
+      },
+      {
+        "title": "Baba Budangiri & Manikyadhara Falls",
+        "description": "Sacred mountain range famous for early Sufi coffee cultivation and mountain streams.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 2.5,
+        "category": "nature",
+        "is_estimate": false
+      },
+      {
+        "title": "Coffee Plantation Heritage Tour",
+        "description": "Walk among arabica bushes and discover bean-to-cup coffee processing.",
+        "estimated_entry_fee_inr": 200,
+        "estimated_time_hours": 2.0,
+        "category": "nature",
+        "is_estimate": true
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "badami",
+    "name": "Badami, Pattadakal & Aihole",
+    "name_kannada": "ಬಾದಾಮಿ, ಪಟ್ಟದಕಲ್ಲು ಮತ್ತು ಐಹೊಳೆ",
+    "region": "heritage_circuit",
+    "interests": ["heritage", "spirituality", "adventure"],
+    "short_description": "Cradle of Indian temple architecture featuring Chalukya sandstone rock-cut cave temples.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 1300,
+    "estimated_daily_food_cost": 450,
+    "latitude": 15.9189,
+    "longitude": 75.6768,
+    "best_season": "October to March",
+    "highlight_foods": ["North Karnataka Jolada Rotti", "Yennegai (Stuffed Brinjal)", "Shenga Chutney Pudi", "Girmit"],
+    "tags": ["chalukya", "caves", "sandstone", "unesco", "ancient"],
+    "sample_attractions": [
+      {
+        "title": "Badami Rock-cut Cave Temples",
+        "description": "Four cliffside caves carved out of red sandstone overlooking Agastya Lake.",
+        "estimated_entry_fee_inr": 25,
+        "estimated_time_hours": 3.0,
+        "category": "heritage",
+        "is_estimate": true
+      },
+      {
+        "title": "Pattadakal Temple Complex",
+        "description": "UNESCO World Heritage site demonstrating seamless fusion of Dravidian and Nagara styles.",
+        "estimated_entry_fee_inr": 40,
+        "estimated_time_hours": 2.5,
+        "category": "heritage",
+        "is_estimate": true
+      },
+      {
+        "title": "Aihole Durga Temple Complex",
+        "description": "Experimental apsidal temple architecture and prehistoric dolmens.",
+        "estimated_entry_fee_inr": 25,
+        "estimated_time_hours": 2.0,
+        "category": "heritage",
+        "is_estimate": true
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "kabini",
+    "name": "Kabini & Nagarhole National Park",
+    "name_kannada": "ಕಬಿನಿ ಮತ್ತು ನಾಗರಹೊಳೆ ರಾಷ್ಟ್ರೀಯ ಉದ್ಯಾನ",
+    "region": "southern_karnataka",
+    "interests": ["wildlife", "nature", "adventure"],
+    "short_description": "Premier tiger and elephant sanctuary on the banks of River Kabini in the Nilgiri Biosphere.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 3200,
+    "estimated_daily_food_cost": 900,
+    "latitude": 11.9261,
+    "longitude": 76.2625,
+    "best_season": "October to May",
+    "highlight_foods": ["Mysore South Indian Meals", "Ragi Mudde with Sambar", "Fresh Buttermilk"],
+    "tags": ["tigers", "elephants", "safari", "forest", "river"],
+    "sample_attractions": [
+      {
+        "title": "Nagarhole Jungle Jeep Safari",
+        "description": "Guided forest safari with opportunities to spot black panthers, tigers, leopards, and herds of wild elephants.",
+        "estimated_entry_fee_inr": 750,
+        "estimated_time_hours": 3.5,
+        "category": "wildlife",
+        "is_estimate": true
+      },
+      {
+        "title": "Kabini River Coracle & Boat Safari",
+        "description": "Float along the riverbanks to observe marsh crocodiles, otters, and aquatic birds.",
+        "estimated_entry_fee_inr": 500,
+        "estimated_time_hours": 2.5,
+        "category": "nature",
+        "is_estimate": true
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "udupi",
+    "name": "Udupi & Murudeshwar",
+    "name_kannada": "ಉಡುಪಿ ಮತ್ತು ಮುರುಡೇಶ್ವರ",
+    "region": "coastal",
+    "interests": ["food", "spirituality", "beaches", "heritage"],
+    "short_description": "Coastal culinary pilgrimage center home to Krishna Matha, pristine St. Mary's basalt island, and the towering Murudeshwar Shiva.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 1600,
+    "estimated_daily_food_cost": 550,
+    "latitude": 13.3409,
+    "longitude": 74.7421,
+    "best_season": "October to March",
+    "highlight_foods": ["Authentic Udupi Sambar & Masala Dosa", "Neer Dosa", "Goli Baje", "Udupi Mattu Gulla Podi"],
+    "tags": ["krishna", "islands", "culinary", "statue", "coastal"],
+    "sample_attractions": [
+      {
+        "title": "Sri Krishna Matha & Kanakana Kindi",
+        "description": "13th-century monastery established by Saint Madhvacharya with unique darshan window.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 2.0,
+        "category": "spirituality",
+        "is_estimate": false
+      },
+      {
+        "title": "St. Mary's Island Geological Monument",
+        "description": "Sub-aerial volcanic columnar basalt formations created millions of years ago in the Arabian sea.",
+        "estimated_entry_fee_inr": 350,
+        "estimated_time_hours": 3.0,
+        "category": "nature",
+        "is_estimate": true
+      },
+      {
+        "title": "Murudeshwar Shiva Temple & Rajagopura",
+        "description": "World's second-tallest Shiva statue situated on a peninsula surrounded on three sides by sea.",
+        "estimated_entry_fee_inr": 20,
+        "estimated_time_hours": 2.5,
+        "category": "spirituality",
+        "is_estimate": true
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "dandeli",
+    "name": "Dandeli",
+    "name_kannada": "ದಾಂಡೇಲಿ",
+    "region": "western_ghats",
+    "interests": ["adventure", "wildlife", "nature"],
+    "short_description": "Adventure capital of Karnataka famous for Kali River white-water rafting and hornbill reserves.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 1900,
+    "estimated_daily_food_cost": 650,
+    "latitude": 15.2417,
+    "longitude": 74.6292,
+    "best_season": "October to May",
+    "highlight_foods": ["Dharwad Peda", "Jolada Rotti Meals", "Bamboo Shoot Fry", "Sugarcane Juice"],
+    "tags": ["rafting", "kayaking", "kali-river", "hornbill", "canopy"],
+    "sample_attractions": [
+      {
+        "title": "River Kali White Water Rafting",
+        "description": "Grade II and III rapids through thick jungle gorges on the perennial Kali River.",
+        "estimated_entry_fee_inr": 1200,
+        "estimated_time_hours": 3.5,
+        "category": "adventure",
+        "is_estimate": true
+      },
+      {
+        "title": "Syntheri Rocks & River Kaneri",
+        "description": "Monolithic 300-ft granite rock canyon hollowed by rushing streams.",
+        "estimated_entry_fee_inr": 40,
+        "estimated_time_hours": 2.0,
+        "category": "nature",
+        "is_estimate": true
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "belur_halebidu",
+    "name": "Belur & Halebidu",
+    "name_kannada": "ಬೇಲೂರು ಮತ್ತು ಹಳೇಬೀಡು",
+    "region": "heritage_circuit",
+    "interests": ["heritage", "spirituality"],
+    "short_description": "UNESCO-inscribed twin jewels of 12th-century Hoysala soapstone architecture.",
+    "ideal_duration_days": 1,
+    "estimated_stay_cost_per_night": 1400,
+    "estimated_daily_food_cost": 500,
+    "latitude": 13.1623,
+    "longitude": 75.8576,
+    "best_season": "October to April",
+    "highlight_foods": ["Akki Rotti", "Benne Dosa", "Filter Coffee"],
+    "tags": ["hoysala", "sculptures", "unesco", "soapstone", "temples"],
+    "sample_attractions": [
+      {
+        "title": "Chennakeshava Temple, Belur",
+        "description": "Ornate star-shaped platform adorned with dancers (Madanikas) and intricate friezes.",
+        "estimated_entry_fee_inr": 50,
+        "estimated_time_hours": 2.5,
+        "category": "heritage",
+        "is_estimate": true
+      },
+      {
+        "title": "Hoysaleswara Temple, Halebidu",
+        "description": "Dravidian temple complex depicting 20,000 soapstone relief sculptures.",
+        "estimated_entry_fee_inr": 50,
+        "estimated_time_hours": 2.5,
+        "category": "heritage",
+        "is_estimate": true
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "mangaluru",
+    "name": "Mangaluru",
+    "name_kannada": "ಮಂಗಳೂರು",
+    "region": "coastal",
+    "interests": ["food", "beaches", "heritage", "spirituality"],
+    "short_description": "Port gateway with Tulunadu heritage, legendary coastal cuisine, and historic Catholic chapels.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 1700,
+    "estimated_daily_food_cost": 700,
+    "latitude": 12.9141,
+    "longitude": 74.8560,
+    "best_season": "October to March",
+    "highlight_foods": ["Mangalorean Ghee Roast (Paneer/Chicken)", "Kori Rotti", "Pabba's Gadbad Ice Cream", "Neer Dosa with Sambar"],
+    "tags": ["tulunadu", "seafood", "beaches", "churches", "culture"],
+    "sample_attractions": [
+      {
+        "title": "St. Aloysius Chapel Frescoes",
+        "description": "Historic 1885 chapel featuring wall paintings by Italian Jesuit Antonio Moscheni.",
+        "estimated_entry_fee_inr": 20,
+        "estimated_time_hours": 1.5,
+        "category": "heritage",
+        "is_estimate": true
+      },
+      {
+        "title": "Panambur Beach & Sunset Pier",
+        "description": "Vibrant beach offering dolphin boat rides, camel rides, and kite festivals.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 2.5,
+        "category": "beaches",
+        "is_estimate": false
+      },
+      {
+        "title": "Kudroli Gokarnanatheshwara Temple",
+        "description": "Modernised temple famous for grand Mangaluru Dasara celebrations.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 1.5,
+        "category": "spirituality",
+        "is_estimate": false
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "jogfalls",
+    "name": "Jog Falls & Shivamogga",
+    "name_kannada": "ಜೋಗ ಜಲಪಾತ ಮತ್ತು ಶಿವಮೊಗ್ಗ",
+    "region": "western_ghats",
+    "interests": ["nature", "adventure"],
+    "short_description": "Gateway to Malnad featuring India's famous segmented plunge waterfall on River Sharavathi.",
+    "ideal_duration_days": 1,
+    "estimated_stay_cost_per_night": 1500,
+    "estimated_daily_food_cost": 500,
+    "latitude": 14.2285,
+    "longitude": 74.8117,
+    "best_season": "July to December (Monsoon & Post-monsoon)",
+    "highlight_foods": ["Halasina Kadabu", "Tambli", "Malgudi Filter Coffee"],
+    "tags": ["waterfall", "monsoon", "sharavathi", "malnad", "nature"],
+    "sample_attractions": [
+      {
+        "title": "Jog Falls Viewpoints (Raja, Roarer, Rocket, Rani)",
+        "description": "253-meter cascading spectacle plunging down the rocky Western Ghat chasms.",
+        "estimated_entry_fee_inr": 50,
+        "estimated_time_hours": 3.0,
+        "category": "nature",
+        "is_estimate": true
+      },
+      {
+        "title": "Sharavathi Valley Wildlife Sanctuary",
+        "description": "Evergreen forest reserve protecting endangered lion-tailed macaques.",
+        "estimated_entry_fee_inr": 50,
+        "estimated_time_hours": 2.5,
+        "category": "nature",
+        "is_estimate": true
+      }
+    ],
+    "is_sample_or_estimated": true
+  }
+]

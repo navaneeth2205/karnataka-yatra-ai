@@ -1,0 +1,42 @@
+{
+  "summary": {
+    "total_rows": 238,
+    "usable_count": 198,
+    "usable_percentage": 83.19,
+    "defective_count": 40,
+    "defective_percentage": 16.81,
+    "few_shot_curated_count": 160,
+    "held_out_evaluation_count": 38
+  },
+  "defect_breakdown": {
+    "BUDGET_ARITHMETIC_ERROR": 39,
+    "COMPLETION_TOO_SHORT": 1
+  },
+  "usable_by_language": {
+    "Tamil (India)": 20,
+    "English (India)": 19,
+    "original": 81,
+    "Hindi (India)": 20,
+    "Malayalam (India)": 20,
+    "Telugu (India)": 20,
+    "Kannada (India)": 18
+  },
+  "defective_by_language": {
+    "original": 19,
+    "Kannada (India)": 3,
+    "English (India)": 4,
+    "Hindi (India)": 5,
+    "Malayalam (India)": 2,
+    "Telugu (India)": 5,
+    "Tamil (India)": 2
+  },
+  "held_out_by_language": {
+    "original": 14,
+    "Tamil (India)": 4,
+    "Telugu (India)": 4,
+    "Kannada (India)": 4,
+    "Hindi (India)": 4,
+    "English (India)": 4,
+    "Malayalam (India)": 4
+  }
+}

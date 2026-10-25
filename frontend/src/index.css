@@ -1,0 +1,123 @@
+@import 'leaflet/dist/leaflet.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+.font-kannada {
+  font-family: 'Tiro Kannada', serif;
+}
+
+/* Leaflet map custom styles */
+.leaflet-container {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  z-index: 10 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 14px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #e7e5e4 !important;
+  padding: 4px !important;
+}
+
+.leaflet-popup-tip {
+  background: white !important;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+}
+
+/* Screen visibility default for print-only elements */
+.print-only {
+  display: none !important;
+}
+
+/* ==========================================================================
+   PRINT STYLESHEET (PDF & Physical Printing)
+   ========================================================================== */
+@media print {
+  /* Show print-only banners and hide interactive navigation elements */
+  .print-only {
+    display: block !important;
+  }
+
+  .no-print,
+  header,
+  footer,
+  nav,
+  button,
+  .revision-panel-container {
+    display: none !important;
+  }
+
+  /* Reset document styling for paper */
+  body {
+    background: #ffffff !important;
+    color: #1c1917 !important;
+    font-size: 10pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .max-w-7xl {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Prevent page breaks inside cards */
+  .page-break-avoid,
+  .bg-white {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-bottom: 1rem !important;
+    box-shadow: none !important;
+    border: 1px solid #d6d3d1 !important;
+  }
+
+  /* Flatten two-column grid into continuous narrative for print */
+  .grid.lg\:grid-cols-3 {
+    display: block !important;
+  }
+
+  .lg\:col-span-2 {
+    width: 100% !important;
+  }
+
+  /* Clean up shadows and transitions */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+  }
+
+  /* Page margins */
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+}
