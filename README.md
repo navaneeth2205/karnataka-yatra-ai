@@ -1,11 +1,46 @@
-# Karnataka Yatra AI (ಕರ್ನಾಟಕ ಯಾತ್ರೆ)
-> AI-Powered Personalized Travel Planner for Karnataka
+# Karnataka Yatra AI (ಕರ್ನಾಟಕ ಯಾತ್ರೆ AI) 🚩
+> **AI-Powered Autonomous & Rain-Adaptive Travel Planner for Karnataka**  
+> *Built for the **Kannada Digital Innovation Hackathon 2026** — The National Institute of Engineering (NIE), Mysuru in collaboration with **Adaption Labs**.*  
+> **Theme:** *Code. Create. Celebrate Kannada.*
 
-Karnataka Yatra AI is a hackathon-ready, full-stack travel planning application designed to generate realistic, budget-aware itineraries across Karnataka's diverse regions—from UNESCO world heritage monuments in Hampi and Badami to misty Western Ghats coffee estates and sun-drenched Karavali beaches.
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688.svg?style=flat&logo=FastAPI)](https://fastapi.tiangolo.com)
+[![React](https://img.shields.io/badge/React-18.0+-61DAFB.svg?style=flat&logo=React)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6.svg?style=flat&logo=TypeScript)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4+-38B2AC.svg?style=flat&logo=TailwindCSS)](https://tailwindcss.com)
+[![Open-Meteo](https://img.shields.io/badge/Live_Weather-Open--Meteo-blue.svg)](https://open-meteo.com)
+[![OpenStreetMap](https://img.shields.io/badge/Map_Tiles-OpenStreetMap-green.svg)](https://www.openstreetmap.org)
+[![Pytest](https://img.shields.io/badge/Tests-30%20Passed-brightgreen.svg)]()
 
 ---
 
-## Key Features
+## 📌 Project Overview & Hackathon Alignment
+
+**Karnataka Yatra AI** is an intelligent, culture-first travel companion built to digitize and celebrate the rich heritage, landscapes, and culinary traditions of Karnataka. Addressing the **Tourism & Heritage Promotion** track in the **Kannada Digital Innovation Hackathon 2026**, the platform solves the core challenges faced by modern travelers: fragmented regional data, inaccurate budget surprises, language barriers, and unpredictable tropical monsoon downpours.
+
+### How it Celebrates Kannada & Karnataka:
+- **100% Indic Script Localization:** Outputs day-by-day itineraries, regional dishes, and cultural tips in pure **Kannada script (ಕನ್ನಡ)**, eliminating awkward half-English transliterations. Also supports Hindi, Telugu, Tamil, Malayalam, and English.
+- **Embedded Kannada Travel Phrasebook:** Equips tourists with contextual conversational Kannada (`ನಮಸ್ಕಾರ`, `ಊಟ ಆಯ್ತಾ?`, `ಎಷ್ಟು ಆಗುತ್ತೆ?`, `ದಯವಿಟ್ಟು ಸಹಾಯ ಮಾಡಿ`) with phonetic pronunciation guides.
+- **Authentic Culinary Mapping:** Recommends regional dishes unique to each corridor (Mysuru Pak, Mangalorean Neer Dosa & Ghee Roast, Dharwad Peda, Jolada Rotti Oota, Coorg Pandi & Kadambuttu).
+- **Adaption Labs Dataset Integration:** Ingests and rigorously evaluates curated Kannada travel pairs and held-out evaluation sets using modular adapters.
+
+---
+
+## 🌟 Key Technical Innovations
+
+1. **Automated Live Weather Sensing (Zero Manual Input)**:
+   - Senses real-time temperature, precipitation probability, and season from the traveler's hub city via the free **Open-Meteo API** without asking the user tedious season questions.
+
+2. **Real-Time Rain-Adaptive Itinerary Engine**:
+   - If precipitation or sudden downpours are detected in the region, outdoor activities are automatically swapped for sheltered indoor sanctuaries (e.g. *Amba Vilas Palace interior darbar halls, Visvesvaraya Science Museum, Kamalapura Archaeological Gallery, Coffee Cupping Labs in Coorg*).
+
+3. **Deterministic Mathematical Budget Engine**:
+   - Unlike generic AI chatbots that hallucinate travel costs, Karnataka Yatra AI computes 100% line-item balanced budgets (Accommodation, Food, Transit, Entry Fees, Contingency Reserve) scaled dynamically by party size and room allocation rules.
+
+4. **Zero-API-Key Interactive Map**:
+   - Features real-time visual route tracking and distance estimation powered by official **OpenStreetMap** tile layers and Leaflet.
+
+5. **Instant Mobile WhatsApp Sharing**:
+   - One-click export to WhatsApp with clean Unicode formatting, line-item breakdowns, and emergency contacts.
 
 1. **Deterministic Budget Engine**:
    - Computes transparent line-item allocations for accommodation, food, transport, entry fees, and safety contingency reserves.
