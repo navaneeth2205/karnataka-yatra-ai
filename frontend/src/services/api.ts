@@ -6,10 +6,19 @@ import {
   WeatherInfo,
 } from '../types/travel';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.PROD ? '' : 'http://localhost:8000');
+
+function getApiUrl(endpoint: string): URL {
+  const base =
+    API_BASE_URL ||
+    (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:8000');
+  return new URL(endpoint, base);
+}
 
 export async function fetchLiveWeather(city: string): Promise<WeatherInfo> {
-  const url = new URL(`${API_BASE_URL}/api/v1/weather/current`);
+  const url = getApiUrl('/api/v1/weather/current');
   url.searchParams.set('city', city);
   url.searchParams.set('_t', Date.now().toString());
   const res = await fetch(url.toString(), { cache: 'no-store' });
@@ -20,7 +29,8 @@ export async function fetchLiveWeather(city: string): Promise<WeatherInfo> {
 }
 
 export async function fetchHealth(): Promise<{ status: string; destinations_count: number }> {
-  const res = await fetch(`${API_BASE_URL}/health`);
+  const url = getApiUrl('/health');
+  const res = await fetch(url.toString());
   if (!res.ok) {
     throw new Error(`Health check failed with status ${res.status}`);
   }
@@ -32,7 +42,7 @@ export async function fetchDestinations(params?: {
   region?: string;
   search?: string;
 }): Promise<{ total: number; items: Destination[] }> {
-  const url = new URL(`${API_BASE_URL}/api/v1/destinations`);
+  const url = getApiUrl('/api/v1/destinations');
   if (params?.interest) url.searchParams.set('interest', params.interest);
   if (params?.region) url.searchParams.set('region', params.region);
   if (params?.search) url.searchParams.set('search', params.search);
@@ -45,7 +55,8 @@ export async function fetchDestinations(params?: {
 }
 
 export async function planTrip(request: TripPlanRequest): Promise<TripPlanResponse> {
-  const res = await fetch(`${API_BASE_URL}/api/v1/trips/plan`, {
+  const url = getApiUrl('/api/v1/trips/plan');
+  const res = await fetch(url.toString(), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(request),
@@ -58,7 +69,8 @@ export async function planTrip(request: TripPlanRequest): Promise<TripPlanRespon
 }
 
 export async function validateTrip(request: TripPlanRequest): Promise<TripValidationResult> {
-  const res = await fetch(`${API_BASE_URL}/api/v1/trips/validate`, {
+  const url = getApiUrl('/api/v1/trips/validate');
+  const res = await fetch(url.toString(), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(request),
@@ -74,7 +86,8 @@ export async function reviseTrip(
   currentTrip: TripPlanResponse,
   revisionInstruction: string
 ): Promise<TripPlanResponse> {
-  const res = await fetch(`${API_BASE_URL}/api/v1/trips/revise`, {
+  const url = getApiUrl('/api/v1/trips/revise');
+  const res = await fetch(url.toString(), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

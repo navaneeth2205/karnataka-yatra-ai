@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: karnataka-yatra-ai
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: "npm --prefix frontend install && npm --prefix frontend run build && pip install -r backend/requirements.txt"
+    startCommand: "uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: NODE_VERSION
+        value: 20.12.2
+      - key: ENVIRONMENT
+        value: production
+      - key: LLM_PROVIDER
+        value: deterministic
+      - key: GEMINI_API_KEY
+        sync: false
