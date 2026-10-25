@@ -128,56 +128,56 @@ export const ResultsPage: React.FC = () => {
       </div>
 
       {/* Screen Top Banner & Header */}
-      <div className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 shadow-xs space-y-4">
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-          <div className="space-y-3 max-w-3xl">
+      <div className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 shadow-xs space-y-4 min-w-0">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 min-w-0">
+          <div className="space-y-3 max-w-3xl min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-black bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-md border border-amber-300">
+              <span className="text-xs font-black bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-md border border-amber-300 shrink-0">
                 #{trip.trip_id}
               </span>
-              <span className="text-xs font-semibold bg-stone-100 text-stone-700 px-2.5 py-0.5 rounded-md">
+              <span className="text-xs font-semibold bg-stone-100 text-stone-700 px-2.5 py-0.5 rounded-md shrink-0">
                 Starting: {trip.starting_city}
               </span>
-              <span className="text-xs font-semibold bg-stone-100 text-stone-700 px-2.5 py-0.5 rounded-md">
+              <span className="text-xs font-semibold bg-stone-100 text-stone-700 px-2.5 py-0.5 rounded-md shrink-0">
                 {trip.duration_days} Days
               </span>
 
               {/* Party Size Pill */}
-              <span className="inline-flex items-center gap-1 text-xs font-bold bg-amber-50 text-amber-900 border border-amber-200 px-2.5 py-0.5 rounded-md">
-                <Users className="w-3 h-3 text-amber-700" />
+              <span className="inline-flex items-center gap-1 text-xs font-bold bg-amber-50 text-amber-900 border border-amber-200 px-2.5 py-0.5 rounded-md shrink-0">
+                <Users className="w-3 h-3 text-amber-700 shrink-0" />
                 <span>{travelers} {travelers === 1 ? 'Traveler' : 'Travelers'}</span>
                 <span className="text-amber-400">•</span>
-                <Hotel className="w-3 h-3 text-amber-700" />
+                <Hotel className="w-3 h-3 text-amber-700 shrink-0" />
                 <span>{roomsAllocated} Room{roomsAllocated > 1 ? 's' : ''}</span>
               </span>
 
               {/* Season Pill */}
-              <span className="inline-flex items-center gap-1 text-xs font-semibold bg-stone-100 text-stone-700 px-2.5 py-0.5 rounded-md capitalize">
-                <CloudSun className="w-3 h-3 text-amber-600" />
+              <span className="inline-flex items-center gap-1 text-xs font-semibold bg-stone-100 text-stone-700 px-2.5 py-0.5 rounded-md capitalize shrink-0">
+                <CloudSun className="w-3 h-3 text-amber-600 shrink-0" />
                 <span>{trip.travel_season || 'winter'}</span>
               </span>
 
-              <span className="text-xs font-bold uppercase bg-stone-900 text-stone-100 px-2.5 py-0.5 rounded-md">
+              <span className="text-xs font-bold uppercase bg-stone-900 text-stone-100 px-2.5 py-0.5 rounded-md shrink-0">
                 {trip.experience_preference}
               </span>
-              <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
+              <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200 shrink-0">
                 ₹{perPersonCost.toLocaleString('en-IN')}/person
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight break-words">
               {trip.title}
             </h1>
 
-            <p className="text-sm text-stone-600 leading-relaxed">
+            <p className="text-sm text-stone-600 leading-relaxed break-words">
               {trip.summary}
             </p>
 
             {/* AI Model Seasonal Climate Prediction Insight */}
             {trip.seasonal_insight && (
-              <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 flex items-start gap-2.5 text-xs text-amber-950">
+              <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 flex items-start gap-2.5 text-xs text-amber-950 min-w-0">
                 <CloudSun className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-                <div className="leading-relaxed">
+                <div className="leading-relaxed break-words min-w-0">
                   <span className="font-bold text-amber-900 mr-1.5">AI Climate Prediction:</span>
                   <span>{trip.seasonal_insight}</span>
                 </div>
@@ -187,7 +187,7 @@ export const ResultsPage: React.FC = () => {
             {/* Live Weather & Rain-Adaptive Status Banner */}
             {trip.weather_info && (
               <div
-                className={`p-3.5 rounded-2xl flex items-start gap-2.5 text-xs ${
+                className={`p-3.5 rounded-2xl flex items-start gap-2.5 text-xs min-w-0 ${
                   trip.is_rain_adaptive || trip.weather_info.is_rainy
                     ? 'bg-blue-50 border border-blue-200 text-blue-950'
                     : 'bg-stone-50 border border-stone-200 text-stone-800'
@@ -196,7 +196,7 @@ export const ResultsPage: React.FC = () => {
                 <span className="text-lg shrink-0 mt-0.5">
                   {trip.weather_info.weather_icon || (trip.is_rain_adaptive ? '🌧️' : '⛅')}
                 </span>
-                <div className="leading-relaxed">
+                <div className="leading-relaxed break-words min-w-0">
                   <span className="font-bold mr-1.5">
                     {trip.is_rain_adaptive ? '☔ Rain-Adaptive Circuit Active:' : '🌤️ Sensed Atmospheric Weather:'}
                   </span>
@@ -292,9 +292,9 @@ export const ResultsPage: React.FC = () => {
       </div>
 
       {/* Main Grid: Left Itinerary Timeline (2 cols), Right Analytics & Route (1 col) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 min-w-0">
         {/* Left Column: Day-wise Cards */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6 min-w-0">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-bold text-stone-900 flex items-center gap-2">
               <Calendar className="w-5 h-5 text-amber-600" />
@@ -305,14 +305,14 @@ export const ResultsPage: React.FC = () => {
             </span>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-6 min-w-0">
             {trip.days.map((day) => (
               <DayItineraryCard key={day.day_number} day={day} />
             ))}
           </div>
 
           {/* Revision Panel (Hidden during print) */}
-          <div className="revision-panel-container no-print">
+          <div className="revision-panel-container no-print min-w-0">
             <ItineraryRevisionPanel
               currentTrip={trip}
               onTripRevised={handleTripRevised}
@@ -321,7 +321,7 @@ export const ResultsPage: React.FC = () => {
         </div>
 
         {/* Right Column: Budget Breakdown, Route Map, & Kannada Phrases */}
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0">
           <BudgetBreakdownCard budget={trip.budget} />
 
           <RouteMapPlaceholder routeSummary={trip.route_summary} />

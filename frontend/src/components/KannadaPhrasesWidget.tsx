@@ -109,8 +109,8 @@ export const KannadaPhrasesWidget: React.FC<Props> = ({ phrases }) => {
         </span>
       </div>
 
-      {/* Phrases Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
+      {/* Phrases Grid - 1 column layout in sidebar for zero horizontal overflow */}
+      <div className="grid grid-cols-1 gap-3 pt-1">
         {phrases.map((phrase, idx) => {
           const isPlaying = playingIdx === idx;
           const isCopied = copiedIdx === idx;
@@ -122,21 +122,21 @@ export const KannadaPhrasesWidget: React.FC<Props> = ({ phrases }) => {
           return (
             <div
               key={idx}
-              className={`p-4 rounded-2xl border transition-all flex flex-col justify-between ${
+              className={`p-3.5 sm:p-4 rounded-2xl border transition-all flex flex-col justify-between min-w-0 ${
                 isPlaying
                   ? 'bg-red-50/70 border-red-300 ring-2 ring-red-400/40 shadow-xs'
                   : 'bg-stone-50/70 hover:bg-white border-stone-200/80 hover:shadow-2xs'
               }`}
             >
-              <div>
+              <div className="min-w-0">
                 {/* Phrase Title & Action Bar */}
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <span className="font-kannada text-lg font-bold text-stone-900 leading-snug block">
+                <div className="flex items-start justify-between gap-2 min-w-0">
+                  <div className="min-w-0">
+                    <span className="font-kannada text-lg font-bold text-stone-900 leading-snug block truncate">
                       {cleanKannada}
                     </span>
                     {transliteration && (
-                      <span className="text-xs text-stone-500 font-medium">
+                      <span className="text-xs text-stone-500 font-medium truncate block">
                         ({transliteration})
                       </span>
                     )}
