@@ -1,18 +1,26 @@
 /**
- * Native Web Speech API & Indic Audio Synthesis for Kannada Phrases.
- * Allows non-Kannadiga travelers to hear authentic spoken Kannada with zero API keys.
+ * High-fidelity Kannada Audio Pronunciation Utility.
+ * Primary: Server-side neural Indic speech audio streamed via FastAPI proxy (/api/v1/tts).
+ * Fallback: Native browser Web Speech API (SpeechSynthesisUtterance) for offline situations.
  */
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 export const extractKannadaText = (text: string): string => {
-  // Extract Kannada unicode characters (\u0C80-\u0CFF), numbers, and basic punctuation
-  const match = text.match(/[\u0C80-\u0CFF\s\?]+/g);
-  if (match && match.length > 0) {
-    const cleaned = match.join(' ').replace(/\s+/g, ' ').trim();
-    if (cleaned.length > 1) return cleaned;
+  if (!text) return '';
+  // 1. Separate Kannada script from transliteration inside parentheses (e.g. "ನಮಸ್ಕಾರ (Namaskara)")
+  const beforeParen = text.split('(')[0].trim();
+  // 2. Filter for Kannada Unicode range, digits, whitespace, and basic punctuation
+  const kannadaChars = beforeParen.match(/[\u0C80-\u0CFF0-9\s।,?!.-]+/g);
+  if (kannadaChars && kannadaChars.length > 0) {
+    const cleaned = kannadaChars.join('').replace(/\s+/g, ' ').trim();
+    if (cleaned.length > 0) return cleaned;
   }
-  // Fallback: strip parentheses if transliteration is combined
-  return text.split('(')[0].trim();
+  return beforeParen;
 };
+
+// Global audio element reference to halt any active audio before starting a new one
+let activeAudio: HTMLAudioElement | null = null;
 
 export const playKannadaSpeech = (
   rawText: string,
@@ -26,98 +34,124 @@ export const playKannadaSpeech = (
     return () => {};
   }
 
-  // 1. Try Native Web Speech API (High-fidelity on Chrome, Edge, Android, iOS)
-  if ('speechSynthesis' in window) {
+  // Stop any ongoing HTML5 audio
+  if (activeAudio) {
     try {
-      window.speechSynthesis.cancel(); // Stop any overlapping audio
-
-      const utterance = new SpeechSynthesisUtterance(cleanText);
-      utterance.lang = 'kn-IN';
-      utterance.rate = rate; // 0.85x speed for clear pronunciation learning
-
-      // Check for an installed Kannada voice
-      const voices = window.speechSynthesis.getVoices();
-      const knVoice = voices.find(
-        (v) =>
-          v.lang.toLowerCase().startsWith('kn') ||
-          v.name.toLowerCase().includes('kannada')
-      );
-      if (knVoice) {
-        utterance.voice = knVoice;
-      }
-
-      let started = false;
-
-      utterance.onstart = () => {
-        started = true;
-        if (onStart) onStart();
-      };
-
-      utterance.onend = () => {
-        if (onEnd) onEnd();
-      };
-
-      utterance.onerror = () => {
-        fallbackToAudioStream(cleanText, onStart, onEnd);
-      };
-
-      window.speechSynthesis.speak(utterance);
-
-      // Timeout fallback: if browser claims to support SpeechSynthesis but has no Indic voice installed
-      const timer = setTimeout(() => {
-        if (!started && !window.speechSynthesis.speaking) {
-          fallbackToAudioStream(cleanText, onStart, onEnd);
-        }
-      }, 500);
-
-      return () => {
-        clearTimeout(timer);
-        try {
-          window.speechSynthesis.cancel();
-        } catch {}
-        if (onEnd) onEnd();
-      };
-    } catch {
-      return fallbackToAudioStream(cleanText, onStart, onEnd);
-    }
+      activeAudio.pause();
+      activeAudio.currentTime = 0;
+    } catch {}
+    activeAudio = null;
   }
 
-  return fallbackToAudioStream(cleanText, onStart, onEnd);
-};
+  // Stop any active browser speech synthesis
+  if ('speechSynthesis' in window) {
+    try {
+      window.speechSynthesis.cancel();
+    } catch {}
+  }
 
-const fallbackToAudioStream = (
-  cleanText: string,
-  onStart?: () => void,
-  onEnd?: () => void
-): (() => void) => {
+  let isCancelled = false;
+
+  const handleEnd = () => {
+    if (!isCancelled && onEnd) {
+      onEnd();
+    }
+  };
+
+  // 1. Primary: Stream high-quality neural Kannada speech from backend proxy
   try {
-    const encoded = encodeURIComponent(cleanText);
-    const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=kn&q=${encoded}`;
+    const audioUrl = `${API_BASE_URL}/api/v1/tts?text=${encodeURIComponent(cleanText)}`;
     const audio = new Audio(audioUrl);
+    activeAudio = audio;
+    audio.playbackRate = rate;
 
     audio.onplay = () => {
-      if (onStart) onStart();
+      if (!isCancelled && onStart) {
+        onStart();
+      }
     };
 
     audio.onended = () => {
-      if (onEnd) onEnd();
+      if (activeAudio === audio) {
+        activeAudio = null;
+      }
+      handleEnd();
     };
 
     audio.onerror = () => {
-      if (onEnd) onEnd();
+      if (isCancelled) return;
+      // If backend audio fails, fall back to browser Web Speech API
+      playWithSpeechSynthesis(cleanText, onStart, onEnd, rate);
     };
 
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => {
-        if (onEnd) onEnd();
+        if (isCancelled) return;
+        playWithSpeechSynthesis(cleanText, onStart, onEnd, rate);
       });
     }
 
     return () => {
+      isCancelled = true;
       try {
         audio.pause();
         audio.currentTime = 0;
+      } catch {}
+      if (activeAudio === audio) {
+        activeAudio = null;
+      }
+      handleEnd();
+    };
+  } catch {
+    return playWithSpeechSynthesis(cleanText, onStart, onEnd, rate);
+  }
+};
+
+const playWithSpeechSynthesis = (
+  cleanText: string,
+  onStart?: () => void,
+  onEnd?: () => void,
+  rate: number = 0.85
+): (() => void) => {
+  if (!('speechSynthesis' in window)) {
+    if (onEnd) onEnd();
+    return () => {};
+  }
+
+  try {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.lang = 'kn-IN';
+    utterance.rate = rate;
+
+    const voices = window.speechSynthesis.getVoices();
+    const knVoice = voices.find(
+      (v) =>
+        v.lang.toLowerCase().startsWith('kn') ||
+        v.name.toLowerCase().includes('kannada')
+    );
+    if (knVoice) {
+      utterance.voice = knVoice;
+    }
+
+    utterance.onstart = () => {
+      if (onStart) onStart();
+    };
+
+    utterance.onend = () => {
+      if (onEnd) onEnd();
+    };
+
+    utterance.onerror = () => {
+      if (onEnd) onEnd();
+    };
+
+    window.speechSynthesis.speak(utterance);
+
+    return () => {
+      try {
+        window.speechSynthesis.cancel();
       } catch {}
       if (onEnd) onEnd();
     };

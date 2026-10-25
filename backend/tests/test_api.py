@@ -118,3 +118,20 @@ def test_plan_trip_includes_weather_and_season():
     assert data["weather_info"]["city"] == "Bengaluru"
     assert "is_rain_adaptive" in data
     assert "travel_season" in data
+
+
+def test_kannada_tts_endpoint():
+    res = client.get("/api/v1/tts", params={"text": "ನಮಸ್ಕಾರ"})
+    assert res.status_code == 200
+    assert "audio/mpeg" in res.headers.get("content-type", "")
+    assert len(res.content) > 1000
+
+    # Test cache hit
+    res_cached = client.get("/api/v1/tts", params={"text": "ನಮಸ್ಕಾರ"})
+    assert res_cached.status_code == 200
+    assert res_cached.content == res.content
+
+    # Test empty text validation
+    res_empty = client.get("/api/v1/tts", params={"text": "   "})
+    assert res_empty.status_code == 400
+

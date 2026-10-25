@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, Check, Copy, Volume2, VolumeX, Sparkles, Gauge } from 'lucide-react';
 import { KannadaPhrase } from '../types/travel';
-import { playKannadaSpeech } from '../utils/audioUtils';
+import { extractKannadaText, playKannadaSpeech } from '../utils/audioUtils';
 
 interface Props {
   phrases: KannadaPhrase[];
@@ -105,7 +105,7 @@ export const KannadaPhrasesWidget: React.FC<Props> = ({ phrases }) => {
       <div className="p-3 rounded-2xl bg-amber-50/70 border border-amber-200/80 flex items-center gap-2.5 text-xs text-amber-900">
         <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
         <span className="leading-relaxed">
-          Tap the <strong className="text-red-700">Listen (🔊)</strong> button on any phrase to hear natural Kannada audio pronunciation powered by Web Speech Synthesis.
+          Tap the <strong className="text-red-700">Listen (🔊)</strong> button on any phrase to hear authentic Kannada audio pronunciation. Slow mode helps you master each syllable.
         </span>
       </div>
 
@@ -114,6 +114,10 @@ export const KannadaPhrasesWidget: React.FC<Props> = ({ phrases }) => {
         {phrases.map((phrase, idx) => {
           const isPlaying = playingIdx === idx;
           const isCopied = copiedIdx === idx;
+          const cleanKannada = extractKannadaText(phrase.phrase);
+          const transliteration = phrase.phrase.includes('(')
+            ? phrase.phrase.substring(phrase.phrase.indexOf('(') + 1).replace(')', '').trim()
+            : null;
 
           return (
             <div
@@ -127,9 +131,16 @@ export const KannadaPhrasesWidget: React.FC<Props> = ({ phrases }) => {
               <div>
                 {/* Phrase Title & Action Bar */}
                 <div className="flex items-start justify-between gap-2">
-                  <span className="font-kannada text-lg font-bold text-stone-900 leading-snug">
-                    {phrase.phrase}
-                  </span>
+                  <div>
+                    <span className="font-kannada text-lg font-bold text-stone-900 leading-snug block">
+                      {cleanKannada}
+                    </span>
+                    {transliteration && (
+                      <span className="text-xs text-stone-500 font-medium">
+                        ({transliteration})
+                      </span>
+                    )}
+                  </div>
 
                   <div className="flex items-center gap-1 shrink-0">
                     {/* Audio Pronunciation Button */}

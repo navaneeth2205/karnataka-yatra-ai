@@ -52,6 +52,64 @@ def get_current_weather(
         )
 
 
+_tts_audio_cache: dict = {}
+
+
+@router.get(
+    "/api/v1/tts",
+    summary="Synthesize authentic Kannada audio pronunciation",
+    tags=["Audio"],
+)
+def synthesize_kannada_speech(
+    text: str = Query(..., description="Kannada phrase to synthesize into speech audio"),
+):
+    import urllib.parse
+    import httpx
+
+    clean_text = text.strip()
+    if not clean_text:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Text parameter cannot be empty",
+        )
+
+    if clean_text in _tts_audio_cache:
+        return Response(
+            content=_tts_audio_cache[clean_text],
+            media_type="audio/mpeg",
+            headers={
+                "Cache-Control": "public, max-age=604800",
+                "Accept-Ranges": "bytes",
+            },
+        )
+
+    encoded = urllib.parse.quote(clean_text)
+    url = f"https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=kn&q={encoded}"
+    try:
+        with httpx.Client(timeout=8.0, verify=False) as client:
+            resp = client.get(
+                url,
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"},
+            )
+            if resp.status_code == 200 and resp.content:
+                _tts_audio_cache[clean_text] = resp.content
+                return Response(
+                    content=resp.content,
+                    media_type="audio/mpeg",
+                    headers={
+                        "Cache-Control": "public, max-age=604800",
+                        "Accept-Ranges": "bytes",
+                    },
+                )
+    except Exception:
+        pass
+
+    raise HTTPException(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        detail="Failed to synthesize speech audio",
+    )
+
+
 @router.get(
     "/api/v1/destinations",
     response_model=DestinationListResponse,
