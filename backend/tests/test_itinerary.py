@@ -141,3 +141,47 @@ def test_multilingual_localization_output():
     assert "दिन 1" in plan_hi.days[0].title
     assert any("\u0900" <= c <= "\u097f" for c in plan_hi.days[0].morning_activity.title)
 
+
+def test_starting_city_determines_day1_destination():
+    # When user starts in Bengaluru, Day 1 must be Bengaluru
+    plan_blr = itinerary_service.generate_plan(
+        TripPlanRequest(
+            starting_city="Bengaluru",
+            duration_days=2,
+            total_budget_inr=15000,
+            interests=["heritage"],
+            experience_preference="balanced",
+            transport_mode="cab_rental",
+            preferred_language="english",
+        )
+    )
+    assert "Bengaluru" in plan_blr.days[0].destination_name
+
+    # When user starts in Mangaluru, Day 1 must be Mangaluru
+    plan_mlr = itinerary_service.generate_plan(
+        TripPlanRequest(
+            starting_city="Mangaluru",
+            duration_days=2,
+            total_budget_inr=15000,
+            interests=["beaches"],
+            experience_preference="balanced",
+            transport_mode="cab_rental",
+            preferred_language="english",
+        )
+    )
+    assert "Mangaluru" in plan_mlr.days[0].destination_name
+
+    # When user starts in Hubballi, Day 1 must be Hubballi
+    plan_hub = itinerary_service.generate_plan(
+        TripPlanRequest(
+            starting_city="Hubballi",
+            duration_days=2,
+            total_budget_inr=15000,
+            interests=["heritage"],
+            experience_preference="balanced",
+            transport_mode="cab_rental",
+            preferred_language="english",
+        )
+    )
+    assert "Hubballi" in plan_hub.days[0].destination_name
+

@@ -106,6 +106,22 @@ DESTINATION_NAMES: Dict[str, Dict[str, str]] = {
         "malayalam": "ജോഗ് വെള്ളച്ചാട്ടം",
         "english": "Jog Falls",
     },
+    "bengaluru": {
+        "kannada": "ಬೆಂಗಳೂರು",
+        "hindi": "बेंगलुरु",
+        "telugu": "బెంగళూరు",
+        "tamil": "பெங்களூரு",
+        "malayalam": "ബെംഗളൂരു",
+        "english": "Bengaluru",
+    },
+    "hubballi": {
+        "kannada": "ಹುಬ್ಬಳ್ಳಿ-ಧಾರವಾಡ",
+        "hindi": "हुबली-धारवाड़",
+        "telugu": "హుబ్లీ-ధార్వాడ్",
+        "tamil": "ஹூப்ளி-தார்வாட்",
+        "malayalam": "ഹുബ്ബള്ളി-ധാർവാഡ്",
+        "english": "Hubballi-Dharwad",
+    },
 }
 
 # Localized day title templates
@@ -195,6 +211,22 @@ LOCALIZED_CUISINE: Dict[str, Dict[str, List[str]]] = {
         "tamil": ["அரிசி ரொட்டி கத்தரிக்காய் கொஜ்ஜு", "மலெநாடு மூலிகை கஷாயம்", "எஸ்டேட் காபி"],
         "malayalam": ["അക്കി റൊട്ടിയും വഴുതനങ്ങ ഗോജ്ജുവും", "മലനാട് കാപ്പി", "കഷായം"],
         "english": ["Malenadu Akki Rotti & Gojju", "Estate Robusta Coffee", "Herbal Malenadu Kashaya"],
+    },
+    "bengaluru": {
+        "kannada": ["ಬೆಣ್ಣೆ ಮಸಾಲ ದೋಸೆ", "ಫಿಲ್ಟರ್ ಕಾಫಿ", "ರವಾ ಇಡ್ಲಿ", "ವಿವಿ ಪುರಂ ಚಾಟ್ಸ್", "ಮೈಸೂರು ಪಾಕ್"],
+        "hindi": ["बटर मसाला डोसा", "पारंपरिक फ़िल्टर कॉफ़ी", "रवा इडली", "वीवी पुरम स्ट्रीट फ़ूड", "मैसूर पाक"],
+        "telugu": ["బెన్నె మసాలా దోశ", "ఫిల్టర్ కాఫీ", "రవ్వ ఇడ్లీ", "వీవీ పురం చాట్స్", "మైసూర్ పాక్"],
+        "tamil": ["வெண்ணெய் மசாலா தோசை", "பில்டர் காபி", "ரவா இட்லி", "விவி புரம் சாட்", "மைசூர் பாக்"],
+        "malayalam": ["ബട്ടർ മസാല ദോശ", "ഫിൽട്ടർ കോഫി", "റവ ഇഡ്ഡലി", "വിവി പുരം ചാറ്റ്സ്"],
+        "english": ["Benne Masala Dosa", "Traditional Filter Coffee", "Rava Idli", "VV Puram Food Street Chaats", "Mysore Pak"],
+    },
+    "hubballi": {
+        "kannada": ["ಧಾರವಾಡ ಪೇಡಾ", "ಗಿರ್ಮಿಟ್ ಮತ್ತು ಮಿರ್ಚಿ ಬಜ್ಜಿ", "ಜೋಳದ ರೊಟ್ಟಿ ಊಟ"],
+        "hindi": ["धारवाड़ पेड़ा", "गिरमिट और मिर्ची भज्जी", "जोलद रोट्टी भोजन"],
+        "telugu": ["ధార్వాడ్ పేడా", "గిర్మిట్ మరియు మిర్చి బజ్జి", "జొన్న రొట్టె"],
+        "tamil": ["தார்வாட் பேடா", "கிர்மிட் மற்றும் மிளகாய் பஜ்ஜி", "சோள ரொட்டி"],
+        "malayalam": ["ധാർവാഡ് പേഡ", "ഗിർമിറ്റ് & മുളക് ബജ്ജി", "റൊട്ടി ഊണ്"],
+        "english": ["Famous Dharwad Peda", "Spicy Girmit & Mirchi Bajji", "North Karnataka Jolada Rotti Oota"],
     },
 }
 

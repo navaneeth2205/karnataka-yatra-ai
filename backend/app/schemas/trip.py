@@ -105,6 +105,7 @@ class TripPlanResponse(BaseModel):
     seasonal_insight: Optional[str] = None
     weather_info: Optional[dict] = None
     is_rain_adaptive: bool = False
+    interests: List[str] = Field(default_factory=list)
     experience_preference: str
     transport_mode: str
     preferred_language: str

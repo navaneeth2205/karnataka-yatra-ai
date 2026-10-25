@@ -482,5 +482,83 @@
       }
     ],
     "is_sample_or_estimated": true
+  },
+  {
+    "id": "bengaluru",
+    "name": "Bengaluru",
+    "name_kannada": "ಬೆಂಗಳೂರು",
+    "region": "southern_karnataka",
+    "interests": ["heritage", "nature", "food", "adventure", "spirituality"],
+    "short_description": "The capital of Karnataka and historic Garden City, blending royal Tudor Bangalore Palace, historic botanical gardens, and world-famous south Indian filter coffee.",
+    "ideal_duration_days": 2,
+    "estimated_stay_cost_per_night": 1800,
+    "estimated_daily_food_cost": 700,
+    "latitude": 12.9716,
+    "longitude": 77.5946,
+    "best_season": "October to March",
+    "highlight_foods": ["Benne Masala Dosa", "Filter Kaapi", "Rava Idli", "Mysore Pak", "VV Puram Street Chaat"],
+    "tags": ["garden_city", "palace", "museums", "tech", "food_street"],
+    "sample_attractions": [
+      {
+        "title": "Bangalore Palace & Interior Victorian Darbar",
+        "description": "Tudor-style royal palace built by the Wadiyars with stained glass windows and wood-carved interiors.",
+        "estimated_entry_fee_inr": 250,
+        "estimated_time_hours": 2.5,
+        "category": "heritage",
+        "is_estimate": true
+      },
+      {
+        "title": "Lalbagh Botanical Gardens & Glass House",
+        "description": "Historic 240-acre botanical haven founded by Hyder Ali, housing century-old trees and iconic crystal palace pavilion.",
+        "estimated_entry_fee_inr": 30,
+        "estimated_time_hours": 2.0,
+        "category": "nature",
+        "is_estimate": true
+      },
+      {
+        "title": "Visvesvaraya Industrial & Technological Museum & Cubbon Park",
+        "description": "Interactive science galleries and a lush green sanctuary in the heart of Bengaluru.",
+        "estimated_entry_fee_inr": 85,
+        "estimated_time_hours": 2.5,
+        "category": "heritage",
+        "is_estimate": true
+      }
+    ],
+    "is_sample_or_estimated": true
+  },
+  {
+    "id": "hubballi",
+    "name": "Hubballi & Dharwad",
+    "name_kannada": "ಹುಬ್ಬಳ್ಳಿ-ಧಾರವಾಡ",
+    "region": "north_karnataka",
+    "interests": ["heritage", "food", "spirituality"],
+    "short_description": "The commercial and cultural capital of North Karnataka, famous for Western Chalukyan architecture and iconic Dharwad Peda.",
+    "ideal_duration_days": 1,
+    "estimated_stay_cost_per_night": 1200,
+    "estimated_daily_food_cost": 450,
+    "latitude": 15.3647,
+    "longitude": 75.1240,
+    "best_season": "October to February",
+    "highlight_foods": ["Dharwad Peda", "Girmit & Mirchi Bajji", "Jolada Rotti Oota"],
+    "tags": ["chalukya", "heritage", "pedha", "north_karnataka", "culture"],
+    "sample_attractions": [
+      {
+        "title": "Chandramouleshwara Temple & Unkal Lake",
+        "description": "900-year-old Western Chalukya architectural marvel featuring intricately carved four-door sanctums.",
+        "estimated_entry_fee_inr": 0,
+        "estimated_time_hours": 2.0,
+        "category": "heritage",
+        "is_estimate": false
+      },
+      {
+        "title": "Nrupatunga Betta Sunset Viewpoint",
+        "description": "Scenic hilltop offering panoramic views over the twin cities of Hubballi-Dharwad.",
+        "estimated_entry_fee_inr": 20,
+        "estimated_time_hours": 1.5,
+        "category": "nature",
+        "is_estimate": true
+      }
+    ],
+    "is_sample_or_estimated": true
   }
 ]

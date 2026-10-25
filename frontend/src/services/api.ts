@@ -11,7 +11,8 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000
 export async function fetchLiveWeather(city: string): Promise<WeatherInfo> {
   const url = new URL(`${API_BASE_URL}/api/v1/weather/current`);
   url.searchParams.set('city', city);
-  const res = await fetch(url.toString());
+  url.searchParams.set('_t', Date.now().toString());
+  const res = await fetch(url.toString(), { cache: 'no-store' });
   if (!res.ok) {
     throw new Error(`Weather fetch failed (${res.status})`);
   }

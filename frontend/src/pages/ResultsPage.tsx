@@ -263,6 +263,7 @@ export const ResultsPage: React.FC = () => {
                   travelers_count: travelers,
                   travel_season: trip.travel_season,
                   total_budget_inr: trip.budget.requested_budget,
+                  interests: trip.interests || ['heritage', 'nature'],
                   experience_preference: trip.experience_preference,
                   transport_mode: trip.transport_mode,
                   preferred_language: trip.preferred_language,

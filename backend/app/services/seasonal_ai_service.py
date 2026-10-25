@@ -102,6 +102,20 @@ class SeasonalAIPredictor:
     }
 
     @classmethod
+    def _haversine_km(cls, lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+        import math
+        r = 6371.0
+        dlat = math.radians(lat2 - lat1)
+        dlon = math.radians(lon2 - lon1)
+        a = (
+            math.sin(dlat / 2) ** 2
+            + math.cos(math.radians(lat1))
+            * math.cos(math.radians(lat2))
+            * math.sin(dlon / 2) ** 2
+        )
+        return r * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+    @classmethod
     def predict_seasonal_itinerary(
         cls,
         destinations: List[Destination],
@@ -113,14 +127,19 @@ class SeasonalAIPredictor:
         target_dest_count: int,
     ) -> Dict[str, Any]:
         """
-        Predicts optimal destinations and seasonal insights using Gemini LLM if key is present,
-        or our meteorological neural-heuristic model predictor when offline.
+        Predicts optimal destinations and seasonal insights using Gemini LLM if configured,
+        or our meteorological & corridor proximity predictive model when offline.
+        Prioritizes the starting city as Day 1 and groups geographically coherent circuits.
         """
+        from backend.app.services.weather_service import WeatherService
+
         season_key = travel_season.lower()
         if season_key not in cls.SEASONAL_METEOROLOGY:
             season_key = "winter"
 
         season_data = cls.SEASONAL_METEOROLOGY[season_key]
+        norm_start = starting_city.strip().lower()
+        start_lat, start_lon = WeatherService.get_city_coordinates(norm_start)
 
         # 1. Try Gemini LLM prediction if configured
         if settings.GEMINI_API_KEY:
@@ -135,11 +154,71 @@ class SeasonalAIPredictor:
             if gemini_result:
                 return gemini_result
 
-        # 2. Heuristic predictive model: evaluate seasonal suitability scores
+        # 2. Identify starting destination matching the user's starting city
+        start_dest: Optional[Destination] = None
+        alias_map = {
+            "bangalore": "bengaluru",
+            "mysore": "mysuru",
+            "mangalore": "mangaluru",
+            "hubli": "hubballi",
+            "dharwad": "hubballi",
+            "madikeri": "coorg",
+            "chikkamagaluru": "chikmagalur",
+            "shimoga": "jogfalls",
+            "shivamogga": "jogfalls",
+        }
+        resolved_start_id = alias_map.get(norm_start, norm_start)
+
+        for d in destinations:
+            if (
+                d.id == resolved_start_id
+                or d.id in norm_start
+                or norm_start in d.id
+                or d.name.lower() == norm_start
+                or norm_start in d.name.lower()
+            ):
+                start_dest = d
+                break
+
+        selected_dests: List[Destination] = []
+
+        if start_dest:
+            selected_dests.append(start_dest)
+        else:
+            # If starting city is not an exact destination hub, pick the closest one geographically
+            closest_dest = min(
+                destinations,
+                key=lambda d: cls._haversine_km(start_lat, start_lon, d.latitude, d.longitude),
+            )
+            selected_dests.append(closest_dest)
+
+        # 3. Score remaining candidate destinations based on interest, proximity, and climate
         scored_candidates: List[tuple[float, Destination]] = []
         interest_set = {i.lower() for i in interests}
+        chosen_ids = {selected_dests[0].id}
 
         for dest in destinations:
+            if dest.id in chosen_ids:
+                continue
+
+            # Distance from start destination
+            dist_km = cls._haversine_km(start_lat, start_lon, dest.latitude, dest.longitude)
+
+            # Geographic corridor proximity bonus / penalty (prioritize sensible driving times)
+            if dist_km <= 120:
+                proximity_score = 8.5
+            elif dist_km <= 180:
+                proximity_score = 5.5
+            elif dist_km <= 260:
+                proximity_score = 2.5
+            elif dist_km <= 350:
+                proximity_score = -1.0
+            else:
+                proximity_score = -6.0  # Heavy penalty for far-flung destinations on opposite ends
+
+            # Same regional corridor synergy (e.g. coastal with coastal, ghats with ghats)
+            corridor_bonus = 3.5 if dest.region == selected_dests[0].region else 0.0
+
             # Base seasonal affinity
             reg_affinity = season_data["affinity"].get(dest.region, 1.0)
 
@@ -148,51 +227,52 @@ class SeasonalAIPredictor:
             dest_tags = {t.lower() for t in dest.tags}
             interest_overlap = len(interest_set.intersection(dest_interests))
             tag_overlap = len(interest_set.intersection(dest_tags))
-            interest_score = (interest_overlap * 3.0) + (tag_overlap * 1.5)
+            interest_score = (interest_overlap * 3.5) + (tag_overlap * 1.5)
 
             # Specific seasonal synergies
             seasonal_bonus = 0.0
             if season_key == "summer":
-                # Elevation bonus for cool hill stations
                 if dest.id in ["chikmagalur", "coorg"]:
                     seasonal_bonus += 5.0
                 elif dest.id in ["dandeli"]:
-                    seasonal_bonus += 3.5  # Rafting
+                    seasonal_bonus += 3.5
                 elif dest.id in ["hampi", "badami"]:
-                    seasonal_bonus -= 4.0  # Excessive midday heat penalty
+                    seasonal_bonus -= 4.0
             elif season_key == "monsoon":
-                # Waterfall & rain forest bonus
                 if dest.id in ["jogfalls", "coorg", "chikmagalur"]:
                     seasonal_bonus += 5.5
                 elif dest.id in ["gokarna", "udupi"]:
-                    seasonal_bonus -= 3.0  # Sea swimming prohibited
+                    seasonal_bonus -= 3.0
             elif season_key == "winter":
-                # Heritage & wildlife bonus
                 if dest.id in ["hampi", "badami", "kabini", "mysuru"]:
                     seasonal_bonus += 4.5
             elif season_key == "post_monsoon":
-                # Dasara and scenic greenery bonus
                 if dest.id in ["mysuru", "belur_halebidu", "gokarna"]:
                     seasonal_bonus += 4.5
 
-            total_score = (interest_score * 1.8) + (reg_affinity * 4.0) + seasonal_bonus
+            total_score = (
+                (interest_score * 2.0)
+                + (reg_affinity * 3.0)
+                + proximity_score
+                + corridor_bonus
+                + seasonal_bonus
+            )
             scored_candidates.append((total_score, dest))
 
-        # Sort by model score
+        # Sort remaining candidates by score
         scored_candidates.sort(key=lambda x: x[0], reverse=True)
 
-        selected_dests: List[Destination] = []
         for _, d in scored_candidates:
             if len(selected_dests) >= target_dest_count:
                 break
             selected_dests.append(d)
 
         # Generate model insight narrative
-        primary_names = ", ".join([d.name for d in selected_dests[:2]])
+        primary_names = " ➔ ".join([d.name for d in selected_dests])
         insight = (
-            f"AI Model Seasonal Prediction ({season_data['name']}): Selected {primary_names} "
-            f"based on current meteorological indicators ({season_data['temperature_range']}). "
-            f"{season_data['climate_brief']}"
+            f"AI Model Seasonal Prediction ({season_data['name']}): Structured optimal circuit from {starting_city.title()} "
+            f"covering {primary_names} based on current meteorological indicators ({season_data['temperature_range']}) "
+            f"and regional corridor travel feasibility. {season_data['climate_brief']}"
         )
 
         return {

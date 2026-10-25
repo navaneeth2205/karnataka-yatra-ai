@@ -142,6 +142,7 @@ class ItineraryService:
             seasonal_insight=seasonal_result.get("seasonal_insight"),
             weather_info=live_weather,
             is_rain_adaptive=is_rainy,
+            interests=req.interests,
             experience_preference=req.experience_preference,
             transport_mode=req.transport_mode,
             preferred_language=req.preferred_language,
@@ -285,9 +286,11 @@ class ItineraryService:
         elif "beach" in instruction or "coastal" in instruction:
             added_interests.append("beaches")
 
-        interests = ["nature", "heritage"]
+        base_interests = current.interests if getattr(current, "interests", None) else ["nature", "heritage"]
         if added_interests:
-            interests = added_interests + [i for i in interests if i not in added_interests]
+            interests = added_interests + [i for i in base_interests if i not in added_interests]
+        else:
+            interests = base_interests
 
         revised_request = TripPlanRequest(
             starting_city=current.starting_city,

@@ -120,9 +120,18 @@ class WeatherService:
     @classmethod
     def get_city_coordinates(cls, city_name: str) -> tuple[float, float]:
         norm = city_name.strip().lower()
+        # 1. Exact match
+        if norm in KARNATAKA_COORDINATES:
+            return KARNATAKA_COORDINATES[norm]
+        # 2. Known key contained in user input (e.g. "bengaluru city" -> "bengaluru")
         for key, coords in KARNATAKA_COORDINATES.items():
-            if key in norm or norm in key:
+            if key in norm:
                 return coords
+        # 3. User input contained in known key (only if at least 4 characters to avoid false short matches)
+        if len(norm) >= 4:
+            for key, coords in KARNATAKA_COORDINATES.items():
+                if norm in key:
+                    return coords
         # Default fallback to Bengaluru
         return (12.9716, 77.5946)
 
@@ -182,7 +191,7 @@ class WeatherService:
                 f"&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max"
                 f"&timezone=Asia%2FKolkata"
             )
-            with httpx.Client(timeout=4.0) as client:
+            with httpx.Client(timeout=4.0, verify=False) as client:
                 resp = client.get(url, headers={"User-Agent": "KarnatakaYatraAI/1.0"})
                 if resp.status_code == 200:
                     data = resp.json()

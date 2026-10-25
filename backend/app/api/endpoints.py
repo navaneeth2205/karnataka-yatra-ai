@@ -1,5 +1,5 @@
 from typing import Optional
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, Query, Response, status
 from backend.app.schemas.destination import DestinationListResponse
 from backend.app.schemas.trip import (
     TripPlanRequest,
@@ -39,8 +39,10 @@ def health_check():
     tags=["Weather"],
 )
 def get_current_weather(
-    city: str = Query("Bengaluru", description="Karnataka hub city, e.g. Bengaluru, Mysuru, Mangaluru, Hubballi")
+    response: Response,
+    city: str = Query("Bengaluru", description="Karnataka hub city, e.g. Bengaluru, Mysuru, Mangaluru, Hubballi"),
 ):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     try:
         return WeatherService.fetch_live_weather(city)
     except Exception as e:

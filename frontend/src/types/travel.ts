@@ -117,6 +117,7 @@ export interface TripPlanResponse {
   seasonal_insight?: string;
   weather_info?: WeatherInfo;
   is_rain_adaptive?: boolean;
+  interests?: SupportedInterest[];
   experience_preference: string;
   transport_mode: string;
   preferred_language: string;
